@@ -1,0 +1,117 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<table border="0" cellpadding="10" cellspacing="0" width="800">
+	<tr>
+		<td valign="top" style="padding-left: 0;">
+			<div
+				style='background-color: #F9F9F9; border: 1px solid #BFBFBF; padding: 15px;'>
+				<h2 style='color: #1A4977'>WRAPit Order ${Orderid}</h2>
+
+				<h3 style='color: #1A4977'>
+					<strong>Dear ${firstname},</strong>
+				</h3>
+				<p>Thank you for your order. We’ll send a confirmation when your
+					order ships.</p>
+
+				<h2>Order details</h2>
+				<table border="0" cellpadding="10" cellspacing="0" width="800">
+					<tbody>
+						<c:forEach items="${WrapProductList}" var="itm">
+							<tr>
+								<td><img src=""></td>
+								<td>${itm.itemName} <br> ${itm.itemSize} <br>
+									${itm.itemMarkedPrice}
+								</td>
+								<td>${itm.itemCount}</td>
+								<td>${itm.itemSubToal}</td>
+							</tr>
+							<tr>
+								<td
+									style="padding-left: 32px; vertical-align: top; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif">
+									<table id="x_itemDetails"
+										style="width: 95%; border-collapse: collapse">
+										<tbody>
+											<tr>
+												<td class="x_photo"
+													style="width: 150px; text-align: center; padding: 16px 0 10px 0; vertical-align: top; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif">
+													<a href=""><img src="${itm.itemImagePath}" id="x_asin" style="border: 0">
+												</a>
+												</td>
+												<td class="x_name"
+													style="color: rgb(102, 102, 102); padding: 10px 0 0 0; vertical-align: top; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif">
+													<a href="" target="_blank"
+														style="text-decoration: none; color: rgb(0, 102, 153); font: 12px/16px Arial, sans-serif">${itm.itemName}
+													</a>
+													<br>
+													 ${itm.itemSize}
+													  <br> Description: <a href=""
+													target="_blank"
+													style="text-decoration: none; color: rgb(0, 102, 153); font: 12px/16px Arial, sans-serif">
+														${itm.itemDescription}
+														</a> <br>
+													<div style="">
+														<table border="0" cellspacing="4" cellpadding="0"
+															style="border-collapse: separate">
+															<tbody style="vertical-align: bottom">
+																<tr>
+																	<td
+																		style="vertical-align: top; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif">
+																	</td>
+																	<td
+																		style="vertical-align: top; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif">
+																		<a href="" target="_blank" title="Share on Facebook"
+																		style="text-decoration: none; color: rgb(0, 102, 153); font: 12px/16px Arial, sans-serif"><i
+																			class="x_a-icon x_a-icon-share-facebook"></i></a>
+																	</td>
+																	<td
+																		style="vertical-align: top; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif">
+																		<a href="" target="_blank" title="Share on Twitter"
+																		style="text-decoration: none; color: rgb(0, 102, 153); font: 12px/16px Arial, sans-serif"><i
+																			class="x_a-icon x_a-icon-share-twitter"></i></a>
+																	</td>
+																	<td
+																		style="vertical-align: top; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif">
+																		<a href="
+											target="
+																		_blank" title="Pin it on Pinterest"
+																		style="text-decoration: none; color: rgb(0, 102, 153); font: 12px/16px Arial, sans-serif"><i
+																			class="x_a-icon x_a-icon-share-pinterest"></i></a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</td>
+												<td class="x_price"
+													style="width: 110px; text-align: right; font-size: 14px; padding: 10px 10px 0 0; vertical-align: top; line-height: 18px; font-family: Arial, sans-serif">
+													<strong>$ ${itm.itemSubToal}</strong> <br>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+
+				</table>
+
+
+
+
+
+
+				<p>
+					We appreciate your interest in WRAPit If you have any queries,
+					please write to us at <a href="mailto:support@wrapit.com"
+						style='font-style: italic' target="_blank">support@wrapit.com</a><br>
+					<br>Regards,<br> WRAPit Team
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>

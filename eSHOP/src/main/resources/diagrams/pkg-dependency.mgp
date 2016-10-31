@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PackageAnalysis>
+    <Package name="com.wrap.controller" x="656" y="13">
+        <DependencyLink destination="com.wrap.daoimpl"/>
+        <DependencyLink destination="com.wrap.modal">
+            <Point x="1534" y="28"/>
+            <Point x="1542" y="465"/>
+        </DependencyLink>
+        <DependencyLink destination="com.wrap.util">
+            <Point x="82" y="32"/>
+        </DependencyLink>
+    </Package>
+    <Package name="com.wrap.daoimpl" x="667" y="119">
+        <DependencyLink destination="com.wrap.dao"/>
+        <DependencyLink destination="com.wrap.imodal">
+            <Point x="1438" y="127"/>
+            <Point x="1449" y="584"/>
+        </DependencyLink>
+        <DependencyLink destination="com.wrap.modal">
+            <Point x="1096" y="144"/>
+            <Point x="1100" y="281"/>
+            <Point x="1107" y="452"/>
+        </DependencyLink>
+        <DependencyLink destination="com.wrap.util">
+            <Point x="392" y="238"/>
+        </DependencyLink>
+    </Package>
+    <Package name="com.wrap.dao" x="692" y="250">
+        <DependencyLink destination="com.wrap.modal"/>
+    </Package>
+    <Package name="com.wrap.imodal" x="687" y="581"/>
+    <Package name="com.wrap.modal" x="685" y="446">
+        <DependencyLink destination="com.wrap.imodal"/>
+    </Package>
+    <Package name="com.wrap.monitoring" x="727" y="822"/>
+    <Package name="com.wrap.security" x="327" y="753">
+        <DependencyLink destination="com.wrap.modal"/>
+        <DependencyLink destination="com.wrap.util">
+            <Point x="77" y="764"/>
+        </DependencyLink>
+    </Package>
+    <Package name="com.wrap.spring" x="559" y="754"/>
+    <Package name="com.wrap.util" x="13" y="270">
+        <DependencyLink destination="com.wrap.daoimpl">
+            <Point x="384" y="200"/>
+        </DependencyLink>
+        <DependencyLink destination="com.wrap.imodal">
+            <Point x="187" y="597"/>
+        </DependencyLink>
+        <DependencyLink destination="com.wrap.modal">
+            <Point x="227" y="455"/>
+        </DependencyLink>
+    </Package>
+    <Package name="com.wrap.web" x="755" y="753">
+        <DependencyLink destination="com.wrap.monitoring"/>
+    </Package>
+</PackageAnalysis>

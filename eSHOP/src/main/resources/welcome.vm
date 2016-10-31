@@ -1,0 +1,24 @@
+<table border="0" cellpadding="10" cellspacing="0" width="600">
+<tr>
+<td valign="top" style="padding-left:0;">
+<div style='background-color:#F9F9F9;border:1px solid #BFBFBF;padding:15px;'>
+<h2 style='color:#1A4977'>Welcome to WRAPit</h2>
+
+<h3 style='color:#1A4977'><strong>Dear ${firstname},</strong>  </h3>
+<p>Thank you for registering with WRAPit.Your account details are below: </p> 
+
+
+
+<h5 ><a href="${ApplicationURL}" 
+style='font-style:italic' target="_blank">Application URL</a></h5>
+<h5 >UserName: ${username}</h5>
+<h5 >Password: ${password} </h5>
+
+
+<p>We appreciate your interest in WRAPit If you have any queries, 
+ please write to us at <a href="mailto:support@wrapit.com" style='font-style:italic' target="_blank">support@wrapit.com</a><br>
+<br>Regards,<br> WRAPit Team</p>
+</div>
+</td>
+</tr>
+</table>

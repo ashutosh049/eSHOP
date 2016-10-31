@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security 
+						        http://www.springframework.org/schema/security/spring-security-4.0.xsd
+								http://www.springframework.org/schema/beans 
+						        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+						        http://www.springframework.org/schema/context 
+								http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:wrap.properties" />
+	<context:annotation-config />
+
+	<http create-session="always" use-expressions="true">
+		<csrf disabled="true" />
+		<intercept-url pattern="/resources*" access="permitAll" />
+		<intercept-url pattern="/checkout*"
+			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin-panel*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/customer-management*" access="hasRole('ROLE_ADMIN')" />
+
+
+		<form-login login-page='/authenticate'
+			authentication-success-handler-ref="wrapAuthenticationSuccessHandler"
+			authentication-failure-handler-ref="wrapAuthenticationFailureHandler" />
+
+
+		<logout delete-cookies="JSESSIONID" logout-success-url="/index"
+			invalidate-session="true" />
+
+		<remember-me key="uniqueAndSecret" token-validity-seconds="86400" />
+
+		<session-management invalid-session-url="/index?invalid-session">
+			<concurrency-control max-sessions="1"
+				expired-url="/index?session-expired" error-if-maximum-exceeded="true" />
+		</session-management>
+
+	</http>
+
+	<beans:bean id="wrapAuthenticationSuccessHandler"
+		class="com.wrap.security.WrapAuthenticationSuccessHandler" />
+
+	<beans:bean id="wrapAuthenticationFailureHandler"
+		class="com.wrap.security.WrapAuthenticationFailureHandler" />
+
+
+	<beans:bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="${db.driverClassName}" />
+		<beans:property name="url" value="${db.url}" />
+		<beans:property name="username" value="${db.username}" />
+		<beans:property name="password" value="${db.password}" />
+	</beans:bean>
+
+	<beans:bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<beans:property name="interceptors">
+			<beans:list>
+				<beans:ref bean="officeHoursInterceptor" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="officeHoursInterceptor" class="com.wrap.spring.TimeBasedAccessInterceptor">
+		<beans:property name="openingTime" value="9" />
+		<beans:property name="closingTime" value="18" />
+	</beans:bean>
+
+	<beans:bean class="org.springframework.ui.velocity.VelocityEngineFactoryBean"
+		id="velocityEngine">
+		<beans:property name="velocityProperties">
+			<beans:props>
+				<beans:prop key="velocimacro.library" />
+				<beans:prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+				</beans:prop>
+				<beans:prop key="resource.loader">class</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="mailSender" class="com.wrap.util.WrapMailSenderImpl" />
+
+	<beans:bean id="wrapUtil" class="com.wrap.util.WrapUtil">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+	<beans:bean id="wrapCalculator" class="com.wrap.util.WrapCalculator" />
+
+
+	<beans:bean id="wrapCart" class="com.wrap.modal.WrapCart"
+		scope="session" />
+
+	<beans:bean id="wrapNavModal" class="com.wrap.modal.WrapNavModal" />
+	<beans:bean id="wrapOrder" class="com.wrap.modal.WrapOrder" />
+	<beans:bean id="wrapCustomerManagement" class="com.wrap.modal.WrapCustomerManagement" />
+
+
+	<beans:bean id="wrapTabDaoImpl" class="com.wrap.daoimpl.WrapTabDaoImpl" />
+	<beans:bean id="wrapColumnDaoImpl" class="com.wrap.daoimpl.WrapColumnDaoImpl" />
+	<beans:bean id="wrapCategoryDaoImpl" class="com.wrap.daoimpl.WrapCategoryDaoImpl" />
+	<beans:bean id="wrapProductDaoImpl" class="com.wrap.daoimpl.WrapProductDaoImpl" />
+	<beans:bean id="wrapUserDaoImpl" class="com.wrap.daoimpl.WrapUserDaoImpl" />
+	<beans:bean id="wrapUserAddressDaoImpl" class="com.wrap.daoimpl.WrapUserAddressDaoImpl" />
+	<beans:bean id="wrapUserCardDaoImpl" class="com.wrap.daoimpl.WrapUserCardDaoImpl" />
+	<beans:bean id="wrapOrderDaoImpl" class="com.wrap.daoimpl.WrapOrderDaoImpl" />
+
+
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username,password, enabled from wrap_usercredentials where username=?"
+				authorities-by-username-query="select username, role from wrap_userroles where username =?  " />
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>
