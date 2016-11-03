@@ -197,7 +197,7 @@
 		<div class="container">
 			    <ol class="breadcrumb breadcrumb-arrow">
 					<li><a href="admin-panel"><i class="fa fa-home" aria-hidden="true"></i> Admin Home</a></li>
-					<li class="active"><span>Tabs</span></li>
+					<li class="active"><span>Category</span></li>
 				</ol>
 			</div>
 		
@@ -207,7 +207,7 @@
 				<div class="row userInfo">
 					<div class="col-lg-12">
 						<div class="col-lg-6 pull-left" >
-							<h2 class="">Product Tabs List	</h2>
+							<h2 class="">Product Category List	</h2>
 						</div>
 						<div class="col-lg-6 pull-right" >
 							<a data-toggle="modal" data-target="#addTabModal" class="btn btn-default btn-link btn-md">

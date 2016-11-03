@@ -82,9 +82,9 @@ public class WrapHomeController {
 	WrapProductDaoImpl wrapProductDaoImpl;
 
 	@RequestMapping({ "/", "/index" })
-	public ModelAndView helloWorld(final Model model, final Locale locale,
+	public ModelAndView indexPage(final Model model, final Locale locale,
 			HttpSession argHttpSession) {
-		model.addAttribute("message", "Hello World!");
+		
 		wrapNavModal = wrapUtil.getWrapNavModal();
 		model.addAttribute("wrapNavModal", wrapNavModal);
 
@@ -222,6 +222,7 @@ public class WrapHomeController {
 		model.addAttribute("freqBaughtTogetherWrapProductListDesc",	freqBaughtTogetherWrapProductListDesc);
 
 		double freqTotalMarkedPrice = 0;
+		double freqTotalDiscountedPrice = 0;
 		double freqTotalShipping = 0;
 		double freqTotalDiscount = 0;
 		double freqTotalotalTax = 0;
@@ -229,23 +230,31 @@ public class WrapHomeController {
 
 		for (WrapProduct freqProduct : freqBaughtTogetherWrapProductList) {
 			freqTotalMarkedPrice += freqProduct.getWrapProdMarkedPrice();
-			freqTotalDiscount += freqProduct.getWrapProdDiscountPercent();
+			freqTotalDiscountedPrice+=freqProduct.getWrapProdDiscountedPrice();
 		}
 
 		freqTotalMarkedPrice += wrapProduct.getWrapProdMarkedPrice();
-		freqTotalDiscount += wrapProduct.getWrapProdDiscountPercent();
-
 		freqTotalMarkedPrice = wrapUtil.round(freqTotalMarkedPrice, 2);
-		freqTotalDiscount += 10;
-		freqTotalDiscount = wrapUtil.round(freqTotalDiscount, 2);
-		freqTotal = freqTotalMarkedPrice - (freqTotalMarkedPrice * (freqTotalDiscount / 100));
+		
+		freqTotalDiscountedPrice+=wrapProduct.getWrapProdDiscountedPrice();
+		freqTotalDiscountedPrice = wrapUtil.round(freqTotalDiscountedPrice, 2);
+		
+		
+		double extraTenPercentDiscountAmount = freqTotalDiscountedPrice*(0.1);
+		extraTenPercentDiscountAmount = wrapUtil.round(extraTenPercentDiscountAmount, 2);
+		
+		freqTotal  = freqTotalDiscountedPrice - extraTenPercentDiscountAmount; 
 		freqTotal = wrapUtil.round(freqTotal, 2);
 
-		model.addAttribute("freqTotalMarkedPrice", freqTotalMarkedPrice);
+		freqTotalDiscount = freqTotalMarkedPrice-freqTotal;
+		freqTotalDiscount = wrapUtil.round(freqTotalDiscount, 2);
+
+		model.addAttribute("freqTotalDiscountedPrice", freqTotalDiscountedPrice);
 		model.addAttribute("freqTotalDiscount", freqTotalDiscount);
 		model.addAttribute("freqTotalShipping", freqTotalShipping);
 		model.addAttribute("freqTotalotalTax", freqTotalotalTax);
 		model.addAttribute("freqTotal", freqTotal);
+		
 		/** frequently bought together product list ***/
 
 		model.addAttribute("wrapCartItem", new WrapCartItem());
@@ -407,9 +416,13 @@ public class WrapHomeController {
 	@RequestMapping(value = "/createUserAccount", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
 	public @ResponseBody
 	WrapUser createUserAccount(@RequestBody WrapUser argWrapUser) {
+		
 		System.out.println("argWrapUser" + argWrapUser.getFirstName());
+		
 		String userName = wrapUtil.createUserName(argWrapUser.getFirstName());
+		
 		argWrapUser.setUserName(userName);
+		
 		if (argWrapUser.getFirstName() != null
 				&& argWrapUser.getLastName() != null
 				&& argWrapUser.getEmail() != null

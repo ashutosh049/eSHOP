@@ -50,7 +50,7 @@ $(document).ready(function() {
 		
 		 $("input.input").attr("disabled", true);
 		 
-		 var$form = $(this);
+		 var $form = $(this);
 		 
 		 $('#error_msg').text("");
 		 $('#success_msg').text("");

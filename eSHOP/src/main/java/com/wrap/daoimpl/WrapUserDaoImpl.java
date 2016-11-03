@@ -164,19 +164,19 @@ public class WrapUserDaoImpl implements WrapUserDao {
 		if(wrapUtil
 				.getJdbcTemplate()
 				.update("delete from wrap_user_address where userName=?",
-						userName)==1){
+						userName)>=0){
 			if(wrapUtil
 					.getJdbcTemplate()
 					.update("delete from wrap_userroles where userName=?",
-							userName)==1){
+							userName)>=0){
 				if(wrapUtil
 						.getJdbcTemplate()
 						.update("delete from wrap_usercredentials where userName=?",
-								userName)==1){
+								userName)>=0){
 					if(wrapUtil
 							.getJdbcTemplate()
 							.update("delete from wrap_user where userName=?",
-									userName)==1){
+									userName)>=0){
 						return true;
 					}
 				}

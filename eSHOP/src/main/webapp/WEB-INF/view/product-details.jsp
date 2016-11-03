@@ -173,7 +173,8 @@
 										<table class="std table" id="cart-summary">
 											<tr>
 												<td>Sub Total</td>
-												<td class="price">$ ${freqTotalMarkedPrice}</td>
+												<%-- <td class="price">$ ${freqTotalMarkedPrice}</td> --%>
+												<td class="price">$ ${freqTotalDiscountedPrice}</td>
 											</tr>
 											<tr style="">
 												<td>Shipping</td>
@@ -181,8 +182,8 @@
 														shipping!</span></td>
 											</tr>
 											<tr class="cart-total-price ">
-												<td>Discount (extra 10% Off)</td>
-												<td class="price">${freqTotalDiscount} %</td>
+												<td>Total Discount (extra 10% Off)</td>
+												<td class="price">$ ${freqTotalDiscount}</td>
 											</tr>
 											<tr>
 												<td>Total tax</td>
