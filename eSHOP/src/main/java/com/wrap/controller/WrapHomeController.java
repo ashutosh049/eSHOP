@@ -402,6 +402,7 @@ public class WrapHomeController {
 		
 		String errorMessage = (String) httpSession.getAttribute("errorMessage");
 		model.addAttribute("errorMessage", errorMessage);
+		httpSession.setAttribute("errorMessage",null);
 				
 		WrapUser wrapUser = (WrapUser) httpSession.getAttribute("wrapUserSession");
 		String username = (String) httpSession.getAttribute("username");
@@ -557,9 +558,9 @@ public class WrapHomeController {
 		}
 		model.addAttribute("wrapCart", wrapCart);
 
-		WrapUserAddress address = wrapUserAddressDaoImpl
-				.getWrapUserAddress(wrapUser.getUserName());
-		model.addAttribute("address", address);
+		List<WrapUserAddress> addressList = wrapUserAddressDaoImpl
+				.getWrapUserAddressList(wrapUser.getUserName());
+		model.addAttribute("addressList", addressList);
 		return new ModelAndView("my-address");
 
 	}
@@ -585,7 +586,7 @@ public class WrapHomeController {
 
 	// checkout----------------
 
-	@RequestMapping({ "/checkout-1" })
+	@RequestMapping({ "/checkout-11" })
 	public ModelAndView checkout1(final Model model, final Locale locale,
 			HttpSession argHttpSession) {
 		wrapNavModal = wrapUtil.getWrapNavModal();
@@ -921,5 +922,27 @@ public class WrapHomeController {
 		
 		return null;
 	}
+	
+	//--------ONE PAGE CHECKOUT-----------
+	@RequestMapping({ "/checkout-1" })
+	public ModelAndView onePageCheckout(final Model model, final Locale locale,HttpSession argHttpSession) {
+		
+		WrapUser wrapUser = (WrapUser) argHttpSession
+				.getAttribute("wrapUserSession");
+		if (wrapUser == null) {
+			String username = (String) httpSession.getAttribute("username");
+			wrapUser = wrapUtil.getLoggedInUserInfo(username);
+		}
+		
+		List<WrapUserAddress> addressList = wrapUserAddressDaoImpl
+				.getWrapUserAddressList(wrapUser.getUserName());
+		
+		model.addAttribute("addressList", addressList);
+		model.addAttribute("wrapBillingAddress",  new WrapUserAddress());
+		model.addAttribute("wrapShippingAddress",  new WrapUserAddress());
+		
+		return new ModelAndView("one-page-checkout");
+	}
+
 
 }

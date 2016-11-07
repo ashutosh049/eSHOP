@@ -19,6 +19,8 @@
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/admin-panel*" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/customer-management*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/my-address*" access="hasRole('ROLE_USER')" />
+		
 
 
 		<form-login login-page='/authenticate'

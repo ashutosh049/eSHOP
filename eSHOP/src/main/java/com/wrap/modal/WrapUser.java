@@ -5,6 +5,9 @@ package com.wrap.modal;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * DESCRIPTION GOES HERE<br>
@@ -19,11 +22,24 @@ import org.springframework.stereotype.Service;
 @Scope("session")
 public class WrapUser {
 	
+	@NotNull
 	private String userName;
+	
+	@NotNull
 	private String firstName;
+	
+	@NotNull
 	private String lastName;
+	
+	@NotNull
 	private String email;
+	
+	@NotNull
+    @Size(min=6, max=30)
 	private String password;
+	
+	
+	
 	/**
 	 * @return the firstName
 	 */

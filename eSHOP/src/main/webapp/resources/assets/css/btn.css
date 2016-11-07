@@ -200,7 +200,7 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary.active[disabled],
 fieldset[disabled] .btn-primary.active {
-  background-color: #1abc9c;
+  background-color: #34495e;
 }
 .btn-dark {
   background-color: #34495e;

@@ -79,14 +79,14 @@
 <!-- /.Fixed navbar  -->
 
 <div class="container main-container headerOffset">
-    <div class="row">
+   <!--  <div class="row">
         <div class="breadcrumbDiv col-lg-12">
             <ul class="breadcrumb">
                 <li><a href="index">Home</a></li>
                 <li class="active"> Authentication</li>
             </ul>
         </div>
-    </div>
+    </div> -->
     <!-- /.row -->
 
 
@@ -105,43 +105,20 @@
 			  </c:if>	
 			
             <div class="row userInfo">
-                <div class="col-xs-12 col-sm-4">
-                    <h2 class="block-title-2"> Create an account </h2>
-                     <form id="createUserAccount" role="form"  method="post">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" class="form-control firstName" id="firstName"></input>
-                        </div>
-                         <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control lastName" id="lastName"></input>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control email" id="email"></input>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control password" id="password"></input>
-                        </div>
-                        <button type="submit" class="btn   btn-primary" class="createUserAccountSbmtBtn"><i class="fa fa-user"></i> Create an account
-                        </button>
-                    </form>
-                </div>
-
-
-                <div class="col-xs-12 col-sm-4">
+                
+                
+                <div class="col-xs-12 col-sm-4" style="border: 0 solid #ddd;border-radius: 0;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);">
                 	
                     <h2 class="block-title-2"><span>Already registered?</span></h2>
 
-                    <form role="form" action="login" method="post">
+                    <form role="form" action="login" method="post" id="loginUserAccountForm">
                         <div class="form-group">
                             <label for="Username">Username</label>
-                            <input type="text" class="form-control"  id="username" name="username" placeholder="Username">
+                            <input type="text" class="form-control"  id="username" name="username" required="required">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control" id="password" name="password" required="required">
                         </div>
                         <div class="checkbox">
                             <label>
@@ -152,9 +129,51 @@
                             <p><a title="Recover your forgotten password" href="forgot-password">Forgot your
                                 password? </a></p>
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Sign In</button>
+                        <button id="loginUserAccountSbmBtn" 
+							    name="submit"
+							    class="btn btn-primary" 
+							    data-loading-text="<i class='fa fa-cog fa-spin fa-lg fa-fw' aria-hidden='true'></i> Signing in.."
+							    type="submit"><i class="fa fa-sign-in"></i> Sign In
+						</button>	
                     </form>
                 </div>
+                
+                <div class="col-xs-12 col-sm-6" style="margin-left: 10%; border: 0 solid #ddd;border-radius: 0;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);">
+                    <h2 class="block-title-2"> Create an account </h2>
+                     <form id="createUserAccount" role="form"  method="post">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control firstName" id="createFirstName" required="required"></input>
+                        </div>
+                         <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control lastName" id="createLastName" required="required"></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control email" id="createEmail" required="required"></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control password" id="createPassword" required="required">
+                        </div>
+                       <!--  <button type="submit" class="btn   btn-primary" class="createUserAccountSbmtBtn"><i class="fa fa-user"></i> 
+                        	Create an account
+                        </button> -->
+                        
+                        <button id="createUserAccountSbmtBtnn" 
+							    name="submit" 
+							    class="btn btn-primary" 
+							    data-loading-text="<i class='fa fa-cog fa-spin fa-lg fa-fw' aria-hidden='true'></i> Processing.."
+							    type="submit">
+							    <i class="fa fa-user"></i> REGISTER
+						</button>
+                        
+                    </form>
+                </div>
+
+
+                
                <!--  <div class="col-xs-12 col-sm-4">
                     <h2 class="block-title-2"><span>Checkout as Guest</span></h2>
 

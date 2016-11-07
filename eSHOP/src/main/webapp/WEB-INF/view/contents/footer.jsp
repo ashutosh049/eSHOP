@@ -14,8 +14,8 @@
 								</a>
 							</h4>
 							<h4>
-								<a class="inline" href="mailto: support@eSHOP.com"> <i
-									class="fa fa-envelope-o"> </i> support@eSHOP.com
+								<a class="inline" href="mailto: support@wrapit.com"> <i
+									class="fa fa-envelope-o"> </i> support@wrapit.com
 								</a>
 							</h4>
 						</li>

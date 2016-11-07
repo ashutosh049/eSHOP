@@ -18,8 +18,7 @@
 </c:if>
 <script type="text/javascript">
 	var projectDir='<%=ctx%>'+'/';
-	var context = '<%=ctx%>
-	';
+	var context = '<%=ctx%>';
 </script>
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -115,11 +114,38 @@
 
                 <div class="w100 clearfix">
 					
-<%-- 					<c:forEach items="${addressList}" var="address"> --%>
+					<c:forEach items="${addressList}" var="address">
 						<div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><strong>${address.addresstitle}</strong></h3>
+                                <h3 class="panel-title">
+                                	<strong>${address.addresstitle}</strong>
+                                	<%-- <label class="radio-inline pull-right" >
+                                       <input name="userAdresses" 
+                                       		  
+                                              type="radio"
+                                              userName="${address.userName}"
+                                              user_address_id="${address.user_address_id}">
+                                    </label> --%>
+                                    
+                                    <c:choose>
+										<c:when test="${address.defaultAddress==true}">
+											<label class="radio-inline pull-right" >
+											<input name="radios"
+											       type="radio"
+												   userName="${address.userName}"
+												   user_address_id="${address.user_address_id}">
+										</c:when>
+										<c:otherwise>
+											<label class="radio-inline pull-right" >
+											<input name="radios"
+											       type="radio"
+												   userName="${address.userName}"
+												   user_address_id="${address.user_address_id}">
+										</c:otherwise>
+									</c:choose>
+                                	
+                                </h3>
                             </div>
                             <div class="panel-body">
                                 <ul>
@@ -136,13 +162,7 @@
                                     class="fa fa-minus-circle"></i> Delete </a></div>
                         </div>
                     </div>
-<%-- 					</c:forEach> --%>
-					
-                    
-
-                    
-
-                    
+					</c:forEach>
 
                 </div>
                 <!--/.w100-->
@@ -214,5 +234,7 @@
 
 <!-- include custom script for site  -->
 <script src="resources/assets/js/script.js"></script>
+<script src="resources/assets/js/wrap.js"></script>
+
 </body>
 </html>

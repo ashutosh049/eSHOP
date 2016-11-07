@@ -6,17 +6,26 @@ $(document).ready(function() {
 	});
 	*/
 	$("#createUserAccount").submit(function(e) {
-		 $('#error_msg').text("");
+		
+		var $this = $('#createUserAccountSbmtBtnn');
+		 $this.button('loading');	
+		
+		$('#error_msg').text("");
 		 $('#success_msg').text("");
 		e.preventDefault();
 		var argWrapUser = {
 				"userName" : null,
-				"firstName" : $('#firstName').val(),
-				"lastName" : $('#lastName').val(),
-				"email" : $('#email').val(),
-				"password" : $('#password').val()
+				"firstName" : $('#createFirstName').val(),
+				"lastName" : $('#createLastName').val(),
+				"email" : $('#createEmail').val(),
+				"password" : $('#createPassword').val()
 		};
-
+		
+		if($('#createPassword').val()=="" || $('#createPassword').val()==null){
+			alert("password null");
+			return false;
+		}
+		
 		$.ajax({
 			type : "POST",
 			url : "createUserAccount",
@@ -29,6 +38,7 @@ $(document).ready(function() {
 				}
 				$.each( argWrapUser, function( key, value ) {
 					  if(key==="userName"){
+						  $this.button('reset');
 						  $('#success_msg').text("Congratulations! Your user name is '"+value+"'. Login again to continue ");
 						  vex.dialog.alert({
 							    message: "Congratulations! Your user name is '"+value+"'. Login again to continue ",
@@ -46,6 +56,18 @@ $(document).ready(function() {
 
 	});
 	
+	$("#loginUserAccountMdlSbmtForm").submit(function(e) {
+		 var $this = $('#loginUserAccountMdlSbmtBtn');
+		 $this.button('loading');
+		 $this.attr('disabled','disabled');
+	});
+	
+	$("#loginUserAccountForm").submit(function(e) {
+		 var $this = $('#"loginUserAccountSbmBtn"');
+		 $this.button('loading');
+		 $this.attr('disabled','disabled');
+	});
+	
 	$("#createUserAccountMdl").submit(function(e) {
 		
 		 $("input.input").attr("disabled", true);
@@ -58,11 +80,7 @@ $(document).ready(function() {
 		 e.preventDefault();
 		
 		 var $this = $('#createUserAccountMdlSbmtBtn');
-		  $this.button('loading');
-		   /* setTimeout(function() {
-		       $this.button('reset');
-		    	}, 8000);*/
-		
+		 $this.button('loading');		
 		
 		var argWrapUser = {
 				"userName" : null,
@@ -148,4 +166,70 @@ $(document).ready(function() {
             }
         });
     });
+	
+	
+	
+	 $(document).on('click', '#makeDefaultAddress', function (e) {
+	        
+		 e.preventDefault();
+	        
+	        var userName = $(this).attr('userName');
+	        var user_address_id = $(this).attr('user_address_id');
+	        
+	        vex.dialog.confirm({
+	            message: 'Confirm remove ' + custName + ' ?',
+	            callback: function (confirm) {
+	                if (confirm) {
+	                    $.ajax({
+	                        type: "POST",
+	                        cache: false,
+	                        url: "removeCustomer?custName=" + custName,
+	                        contentType: "application/json",
+	                        dataType: "text/html",
+	                        success: function () {
+	                        	vex.dialog.alert({
+	                       		 message: '' + custName + ' removed.',
+	                       		callback: function (value) {
+	                		        window.location.reload();
+	                		    }
+	                           });
+	                        },
+	                        error: function () {
+	                        	vex.dialog.alert({
+	                        		 message: '' + custName + ' removed.',
+	                        		 callback: function (value) {
+	                        		        window.location.reload();
+	                        		    }
+	                            });
+	                        }
+	                    });
+	                } else {
+	                    return;
+	                }
+	            }
+	        });
+	    });
+
+	 /*select default addresss*/
+
+	 //iradio_square-green iChk iCheck-margin checked
+	 /*if($('.iradio_square-green').hasClass('checked')){
+		 alert("check");
+	 }*/
+	 
+	 
+	 //iradio_square-green iChk iCheck-margin checked
+	 $(document).on('click', '.iradio_square-green', function (e) {
+		 alert("click");
+	 });
+	 
+	 alert($('#radio1').is(':checked'));
+	 
+	/* $(document).on('change', '.iradio_square-green', function (e) {
+		 var userName=$(this).attr('userName');
+		 var user_address_id=$(this).attr('user_address_id');
+		 alert("userName : "+userName+"\nuser_address_id : "+user_address_id);
+	 });
+	 */
+	
 });

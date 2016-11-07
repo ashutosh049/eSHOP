@@ -27,6 +27,7 @@ public class WrapUserAddress {
 	private String userName;
 	private String mobilenumber;
 	private String user_address_id;
+	private boolean defaultAddress;
 	private String addresstitle;
 	private String addressLine1;
 	private String addressLine2;
@@ -196,8 +197,20 @@ public class WrapUserAddress {
 	public void setAdditionalinfo(String additionalinfo) {
 		this.additionalinfo = additionalinfo;
 	}
-	
-	
+
+	/**
+	 * @return the defaultAddress
+	 */
+	public boolean isDefaultAddress() {
+		return defaultAddress;
+	}
+
+	/**
+	 * @param defaultAddress the defaultAddress to set
+	 */
+	public void setDefaultAddress(boolean defaultAddress) {
+		this.defaultAddress = defaultAddress;
+	}
 	
 		
 }

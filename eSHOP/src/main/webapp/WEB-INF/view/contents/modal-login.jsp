@@ -2,7 +2,7 @@
 <div class="modal signUpContent fade" id="ModalLogin" tabindex="-1"
 	role="dialog">
 	<div class="modal-dialog ">
-		<form role="form" action="login" method="post">
+		<form role="form" action="login" method="post" id="loginUserAccountMdlSbmtForm">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
@@ -12,14 +12,14 @@
 			<div class="modal-body">
 				<div class="form-group login-username">
 					<div>
-						<input id="login-user" class="form-control input" name="username"
+						<input id="login-user" class="form-control input" name="username" required="required"
 							size="20" placeholder="Username" type="text">
 					</div>
 				</div>
 				<div class="form-group login-password">
 					<div>
 						<input id="login-password" name="password"
-							class="form-control input" size="20" placeholder="Password"
+							class="form-control input" size="20" placeholder="Password" required="required"
 							type="password">
 					</div>
 				</div>
@@ -34,8 +34,15 @@
 				</div>
 				<div>
 					<div>
-						<input name="submit" class="btn  btn-block btn-lg btn-primary"
-							value="LOGIN" type="submit">
+						<!-- <input name="submit" class="btn  btn-block btn-lg btn-primary"
+							value="" type="submit"> -->
+							
+						<button id="loginUserAccountMdlSbmtBtn" 
+							    name="submit" 
+							    class="btn  btn-block btn-lg btn-primary" 
+							    data-loading-text="<i class='fa fa-cog fa-spin fa-lg fa-fw' aria-hidden='true'></i> Processing.."
+							    type="submit">LOGIN
+						</button>	
 					</div>
 				</div>
 				<!--userForm-->
